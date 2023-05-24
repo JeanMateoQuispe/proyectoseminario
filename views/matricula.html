@@ -2,7 +2,7 @@
 <html lang="es">
 
 <head>
-  <title>Title</title>
+  <title>Matriculados</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -51,57 +51,59 @@
                   <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
               </div>
               <div class="modal-body">
-                <div class="row">
-                  <div class="mb-3 col-6">
-                    <label for="alumno" class="form-label">Alumno:</label>
-                    <input type="text" class="form-control" id="alumno" placeholder="Escriba...">
+                <form action="" id="registro-matricula">
+                  <div class="row">
+                    <div class="mb-3 col-6">
+                      <label for="alumno" class="form-label">Alumno:</label>
+                      <input type="text" class="form-control" id="alumno" placeholder="Escriba...">
+                    </div>
+                    <div class="mb-3 col-6">
+                      <label for="fechanac" class="form-label">Fecha nacimiento:</label>
+                      <input type="date" class="form-control" id="fechanac" placeholder="Escriba...">
+                    </div>
+                    <div class="mb-3 col-6">
+                      <label for="numdoc" class="form-label">N° Documento:</label>
+                      <input type="text" class="form-control" id="numdoc" placeholder="Escriba...">
+                    </div>
+                    <div class="mb-3 col-6">
+                      <label for="docentes" class="form-label">Docentes:</label>
+                      <select class="form-select" aria-label="Default select example" id="docentes">
+                        <option selected>Seleccione</option>
+                        <!-- <option value=""></option> -->
+                      </select>
+                    </div>
+                    <div class="mb-3 col-6">
+                      <label for="carreras" class="form-label">Carreras:</label>
+                      <select class="form-select" aria-label="Default select example" id="carreras">
+                        <option selected>Seleccione</option>
+                        <!-- <option value=""></option> -->
+                      </select>
+                    </div>
+                    <div class="mb-3 col-6">
+                      <label for="periodo" class="form-label">Periodo:</label>
+                      <input type="text" class="form-control" id="periodo" placeholder="Escriba...">
+                    </div>
+                    <div class="mb-3 col-6">
+                      <label for="semestre" class="form-label">Semestre:</label>
+                      <input type="text" class="form-control" id="semestre" placeholder="Escriba...">
+                    </div>
+                    <div class="mb-3 col-6">
+                      <label for="fechainicio" class="form-label">Fecha inicio:</label>
+                      <input type="date" class="form-control" id="fechainicio" placeholder="Escriba...">
+                    </div>
+                    <div class="mb-3 col-6">
+                      <label for="fechafin" class="form-label">Fecha final:</label>
+                      <input type="date" class="form-control" id="fechafinal" placeholder="Escriba...">
+                    </div>
+                    <div class="mb-3 col-6">
+                      <label for="pago" class="form-label">Pago:</label>
+                      <input type="text" class="form-control" id="pago" placeholder="S/00.00">
+                    </div>
                   </div>
-                  <div class="mb-3 col-6">
-                    <label for="fechanac" class="form-label">Fecha nacimiento:</label>
-                    <input type="date" class="form-control" id="fechanac" placeholder="Escriba...">
-                  </div>
-                  <div class="mb-3 col-6">
-                    <label for="numdoc" class="form-label">N° Documento:</label>
-                    <input type="text" class="form-control" id="numdoc" placeholder="Escriba...">
-                  </div>
-                  <div class="mb-3 col-6">
-                    <label for="docentes" class="form-label">Docentes:</label>
-                    <select class="form-select" aria-label="Default select example" id="docentes">
-                      <option selected>Seleccione</option>
-                      <!-- <option value=""></option> -->
-                    </select>
-                  </div>
-                  <div class="mb-3 col-6">
-                    <label for="carreras" class="form-label">Carreras:</label>
-                    <select class="form-select" aria-label="Default select example" id="carreras">
-                      <option selected>Seleccione</option>
-                      <!-- <option value=""></option> -->
-                    </select>
-                  </div>
-                  <div class="mb-3 col-6">
-                    <label for="periodo" class="form-label">Periodo:</label>
-                    <input type="text" class="form-control" id="periodo" placeholder="Escriba...">
-                  </div>
-                  <div class="mb-3 col-6">
-                    <label for="semestre" class="form-label">Semestre:</label>
-                    <input type="text" class="form-control" id="semestre" placeholder="Escriba...">
-                  </div>
-                  <div class="mb-3 col-6">
-                    <label for="fechainicio" class="form-label">Fecha inicio:</label>
-                    <input type="date" class="form-control" id="fechainicio" placeholder="Escriba...">
-                  </div>
-                  <div class="mb-3 col-6">
-                    <label for="fechafin" class="form-label">Fecha final:</label>
-                    <input type="date" class="form-control" id="fechafinal" placeholder="Escriba...">
-                  </div>
-                  <div class="mb-3 col-6">
-                    <label for="fechainicio" class="form-label">Pago:</label>
-                    <input type="text" class="form-control" id="fechainicio" placeholder="S/00.00">
-                  </div>
-                </div>
+                </form>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-primary" id="registrar">Guardar</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
               </div>
             </div>
@@ -147,8 +149,8 @@
       const cuerpoTabla = document.querySelector("tbody");
       const lista= document.querySelector("#docentes");
       const carrera = document.querySelector("#carreras");
+      const btnguardar = new document.querySelector("#registrar");
       const modal = new bootstrap.Modal(document.querySelector("#modalId"));
-
 
       function ObtenerCarreras(){
         const parametros = new URLSearchParams();
@@ -222,33 +224,41 @@
       }
 
       function registrarMatriculas(){
-          if(confirm("¿Está seguro de registrar?")){
-            const parametros = new URLSearchParams();
-            parametros.append("operacion","registrar");
+        if(confirm("¿Está seguro de registrar?")){
+          const parametros = new URLSearchParams();
+          parametros.append("operacion","registrar");
 
-            //Enviar datos al formulario
-            parametros.append("marca",document.querySelector("#marca").value);
-            parametros.append("modelo",document.querySelector("#modelo").value);
-            parametros.append("precio",document.querySelector("#precio").value);
-            parametros.append("tipocombustible",document.querySelector("#tipocombustible").value);
-            parametros.append("color",document.querySelector("#color").value);
+          //Enviar datos al formulario
+          parametros.append("alumno",document.querySelector("#alumno").value);
+          parametros.append("fechanac",document.querySelector("#fechanac").value);
+          parametros.append("numdoc",document.querySelector("#numdoc").value);
+          parametros.append("iddocente",document.querySelector("#docentes").value);
+          parametros.append("idcarrera",document.querySelector("#carreras").value);
+          parametros.append("periodo",document.querySelector("#periodo").value);
+          parametros.append("semestre",document.querySelector("#semestre").value);
+          parametros.append("fechainicio",document.querySelector("#fechainicio").value);
+          parametros.append("fechafinal",document.querySelector("#fechafinal").value);
+          parametros.append("pago",document.querySelector("#pago").value);
 
-            fetch("../controllers/Automovil.php",{
-              method: 'POST',
-              body: parametros
-            })
-              .then(response => response.json())
-              .then(datos =>{
-                if(datos.status){
-                  renderData();
-                  document.querySelector("#form-automoviles").reset();
-                  document.querySelector("#marca").focus();
-                }else{
-                  alert(datos.message);
-                }
-              });
-          }
+          fetch("../controllers/matricula.controller.php",{
+            method: 'POST',
+            body: parametros
+          })
+            .then(response => response.json())
+            .then(datos =>{
+              if(datos.status){
+                renderData();
+                document.querySelector("#registro-matricula").reset();
+                document.querySelector("#alumno").focus();
+              }else{
+                alert(datos.message);
+              }
+            });
         }
+      }
+
+        //Eventos
+        btnguardar.addEventListener("click", registrarMatriculas());
         ObtenerDatos();
         Obtenerdocentes();
         ObtenerCarreras();

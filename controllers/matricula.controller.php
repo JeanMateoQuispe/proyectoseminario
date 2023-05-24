@@ -19,9 +19,16 @@ if(isset($_POST['operacion'])){
 
   if($_POST['operacion'] == 'registrar'){
     $datosGuardar = [
-      ""            => $_POST[''],
-      ""            => $_POST[''],
-      ""            => $_POST['']
+      "alumno"            => $_POST['alumno'],
+      "fechanac"          => $_POST['fechanac'],
+      "mundoc"            => $_POST['numdoc'],
+      "iddocente"         => $_POST['iddocente'],
+      "idcarrera"         => $_POST['idcarrera'],
+      "periodo"           => $_POST['periodo'],
+      "semestre"          => $_POST['semestre'],
+      "fechainicio"       => $_POST['fechainicio'],
+      "fechafinal"        => $_POST['fechafinal'],
+      "pago"              => $_POST['pago']
     ];
 
     $respuesta = $plato->registrarMatriculas($datosGuardar);
