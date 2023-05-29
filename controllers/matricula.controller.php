@@ -21,7 +21,7 @@ if(isset($_POST['operacion'])){
     $datosGuardar = [
       "alumno"            => $_POST['alumno'],
       "fechanac"          => $_POST['fechanac'],
-      "mundoc"            => $_POST['numdoc'],
+      "nundoc"            => $_POST['numdoc'],
       "iddocente"         => $_POST['iddocente'],
       "idcarrera"         => $_POST['idcarrera'],
       "periodo"           => $_POST['periodo'],

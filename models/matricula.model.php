@@ -71,4 +71,32 @@ class Matricula extends Conexion{
     }
     return $respuesta;
   }
+
+  // public function registrarMatriculas($datos = []){
+  //   $respuesta = [
+  //     "status"  => false,
+  //     "message" => ""
+  //   ];
+  //   try{
+  //     $consulta = $this->conexion->prepare("CALL spu_registrar_matricula(?,?,?,?,?,?,?,?,?,?)");
+  //     $respuesta["status"] = $consulta->execute(
+  //       array(
+  //         $datos["alumno"],
+  //         $datos["fechanac"],
+  //         $datos["numdoc"],
+  //         $datos["iddocente"],
+  //         $datos["idcarrera"],
+  //         $datos["periodo"],
+  //         $datos["semestre"],
+  //         $datos["fechainicio"],
+  //         $datos["fechafinal"],
+  //         $datos["pago"]
+  //       )
+  //     );
+  //   }
+  //   catch(Exception $e){
+  //     $respuesta["message"] = "No se ha podido completar el proceso. Código error: ". $e->getCode();
+  //   }
+  //   return $respuesta;
+  // }
 }

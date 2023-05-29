@@ -53,49 +53,49 @@
               <div class="modal-body">
                 <form action="" id="registro-matricula">
                   <div class="row">
-                    <div class="mb-3 col-6">
+                    <div class="mb-3 col-lg-6">
                       <label for="alumno" class="form-label">Alumno:</label>
                       <input type="text" class="form-control" id="alumno" placeholder="Escriba...">
                     </div>
-                    <div class="mb-3 col-6">
+                    <div class="mb-3 col-lg-6">
                       <label for="fechanac" class="form-label">Fecha nacimiento:</label>
                       <input type="date" class="form-control" id="fechanac" placeholder="Escriba...">
                     </div>
-                    <div class="mb-3 col-6">
+                    <div class="mb-3 col-lg-6">
                       <label for="numdoc" class="form-label">N° Documento:</label>
                       <input type="text" class="form-control" id="numdoc" placeholder="Escriba...">
                     </div>
-                    <div class="mb-3 col-6">
+                    <div class="mb-3 col-lg-6">
                       <label for="docentes" class="form-label">Docentes:</label>
                       <select class="form-select" aria-label="Default select example" id="docentes">
                         <option selected>Seleccione</option>
                         <!-- <option value=""></option> -->
                       </select>
                     </div>
-                    <div class="mb-3 col-6">
+                    <div class="mb-3 col-lg-6">
                       <label for="carreras" class="form-label">Carreras:</label>
                       <select class="form-select" aria-label="Default select example" id="carreras">
                         <option selected>Seleccione</option>
                         <!-- <option value=""></option> -->
                       </select>
                     </div>
-                    <div class="mb-3 col-6">
+                    <div class="mb-3 col-lg-6">
                       <label for="periodo" class="form-label">Periodo:</label>
                       <input type="text" class="form-control" id="periodo" placeholder="Escriba...">
                     </div>
-                    <div class="mb-3 col-6">
+                    <div class="mb-3 col-lg-6">
                       <label for="semestre" class="form-label">Semestre:</label>
                       <input type="text" class="form-control" id="semestre" placeholder="Escriba...">
                     </div>
-                    <div class="mb-3 col-6">
+                    <div class="mb-3 col-lg-6">
                       <label for="fechainicio" class="form-label">Fecha inicio:</label>
                       <input type="date" class="form-control" id="fechainicio" placeholder="Escriba...">
                     </div>
-                    <div class="mb-3 col-6">
+                    <div class="mb-3 col-lg-6">
                       <label for="fechafin" class="form-label">Fecha final:</label>
                       <input type="date" class="form-control" id="fechafinal" placeholder="Escriba...">
                     </div>
-                    <div class="mb-3 col-6">
+                    <div class="mb-3 col-lg-6">
                       <label for="pago" class="form-label">Pago:</label>
                       <input type="text" class="form-control" id="pago" placeholder="S/00.00">
                     </div>
@@ -103,7 +103,7 @@
                 </form>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="registrar">Guardar</button>
+                <button type="button" class="btn btn-primary" id="registrarmatricula">Guardar</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
               </div>
             </div>
@@ -149,46 +149,8 @@
       const cuerpoTabla = document.querySelector("tbody");
       const lista= document.querySelector("#docentes");
       const carrera = document.querySelector("#carreras");
-      const btnguardar = new document.querySelector("#registrar");
+      const btnguardar = document.querySelector("#registrarmatricula");
       const modal = new bootstrap.Modal(document.querySelector("#modalId"));
-
-      function ObtenerCarreras(){
-        const parametros = new URLSearchParams();
-        parametros.append("operacion","listar");
-        
-        fetch('../controllers/carrera.controller.php',{
-          method: 'POST',
-          body: parametros
-        })
-        .then(respuesta => respuesta.json())
-        .then(datos =>{
-          datos.forEach(element => {
-            const optionTag = document.createElement("option");
-            optionTag.value = element.idcarrera;
-            optionTag.text = element.nombrecarrera;
-            carrera.appendChild(optionTag);
-          }); 
-        });
-      }
-
-      function Obtenerdocentes(){
-        const parametros = new URLSearchParams();
-        parametros.append("operacion","listar");
-        
-        fetch('../controllers/docente.controller.php',{
-          method: 'POST',
-          body: parametros
-        })
-        .then(respuesta => respuesta.json())
-        .then(datos =>{
-          datos.forEach(element => {
-            const optionTag = document.createElement("option");
-            optionTag.value = element.iddocente;
-            optionTag.text = element.docente;
-            lista.appendChild(optionTag);
-          }); 
-        });
-      }
 
       function ObtenerDatos(){
         const parametros = new URLSearchParams();
@@ -211,7 +173,7 @@
               <td>${element.periodo}</td>
               <td>${element.semestre}</td>
               <td>${element.fechainicio}</td>
-              <td>${element.fechafin}</td>
+              <td>${element.fechafinal}</td>
               <td>${element.pago}</td>
             `;
             cuerpoTabla.innerHTML += fila;
@@ -222,6 +184,46 @@
           alert('No encontramos datos')
         });
       }
+
+      function ObtenerCarreras(){
+        const parametros = new URLSearchParams();
+        parametros.append("operacion","listar");
+        
+        fetch('../controllers/carrera.controller.php',{
+          method: 'POST',
+          body: parametros
+        })
+        .then(respuesta => respuesta.json())
+        .then(datos =>{
+          datos.forEach(element => {
+            const optionTag = document.createElement("option");
+            optionTag.value = element[0];
+            optionTag.text = element[2]
+            carrera.appendChild(optionTag);
+          }); 
+        });
+      }
+
+      function Obtenerdocentes(){
+        const parametros = new URLSearchParams();
+        parametros.append("operacion","listar");
+        
+        fetch('../controllers/docente.controller.php',{
+          method: 'POST',
+          body: parametros
+        })
+        .then(respuesta => respuesta.json())
+        .then(datos =>{
+          datos.forEach(element => {
+            const optionTag = document.createElement("option");
+            optionTag.value = element[0];
+            optionTag.text = element[1];
+            lista.appendChild(optionTag);
+          }); 
+        });
+      }
+
+      
 
       function registrarMatriculas(){
         if(confirm("¿Está seguro de registrar?")){
@@ -246,19 +248,18 @@
           })
             .then(response => response.json())
             .then(datos =>{
-              if(datos.status){
-                renderData();
-                document.querySelector("#registro-matricula").reset();
-                document.querySelector("#alumno").focus();
-              }else{
-                alert(datos.message);
-              }
+                if(datos.status){
+                  document.querySelector("#registro-matricula").reset();
+                  document.querySelector("#alumno").focus();
+                }else{
+                  alert(datos.message);
+                }
             });
         }
       }
 
         //Eventos
-        btnguardar.addEventListener("click", registrarMatriculas());
+        btnguardar.addEventListener("click", registrarMatriculas);
         ObtenerDatos();
         Obtenerdocentes();
         ObtenerCarreras();
