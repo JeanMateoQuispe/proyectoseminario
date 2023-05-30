@@ -17,11 +17,11 @@ if(isset($_POST['operacion'])){
     }
   }
 
-  if($_POST['operacion'] == 'registrar'){
+  if($_POST['operacion'] == 'registrarmatricula'){
     $datosGuardar = [
       "alumno"            => $_POST['alumno'],
       "fechanac"          => $_POST['fechanac'],
-      "nundoc"            => $_POST['numdoc'],
+      "numdoc"            => $_POST['numdoc'],
       "iddocente"         => $_POST['iddocente'],
       "idcarrera"         => $_POST['idcarrera'],
       "periodo"           => $_POST['periodo'],
@@ -31,8 +31,37 @@ if(isset($_POST['operacion'])){
       "pago"              => $_POST['pago']
     ];
 
-    $respuesta = $plato->registrarMatriculas($datosGuardar);
+    $respuesta = $matricula->registrarMatriculas($datosGuardar);
     echo json_encode($respuesta );
+  }
+
+  if($_POST['operacion'] == 'obtener'){
+    $respuesta = $matricula->obtener($_POST['idmatricula']);
+    echo json_encode($respuesta);
+  }
+
+  if($_POST['operacion'] == 'actualizar'){
+    $datosActualizar = [
+      "idmatricula"       => $_POST['idmatricula'],
+      "alumno"            => $_POST['alumno'],
+      "fechanac"          => $_POST['fechanac'],
+      "numdoc"            => $_POST['numdoc'],
+      "iddocente"         => $_POST['iddocente'],
+      "idcarrera"         => $_POST['idcarrera'],
+      "periodo"           => $_POST['periodo'],
+      "semestre"          => $_POST['semestre'],
+      "fechainicio"       => $_POST['fechainicio'],
+      "fechafinal"        => $_POST['fechafinal'],
+      "pago"              => $_POST['pago']
+    ];
+
+    $respuesta = $matricula->actualizar($datosActualizar);
+    echo json_encode($respuesta);
+  }
+
+  if($_POST['operacion'] == 'eliminar'){
+    $respuesta = $matricula->eliminar($_POST['idmatricula']);
+    echo json_encode($respuesta);
   }
 
 }
