@@ -183,11 +183,8 @@ if(!isset($_SESSION['seguridad']) || $_SESSION['seguridad']['login'] == false){
                     <tr>
                     <th>ID</th>
                     <th>Docente</th>
-                    <!-- <th>F. Nac</th> -->
-                    <!-- <th>N° DNI</th> -->
                     <th>Especialidad</th>
                     <th>Curso</th>
-                    <!-- <th>Carrera</th> -->
                     <th>Operación</th>
                     </tr>
                 </thead>
