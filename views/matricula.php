@@ -57,10 +57,10 @@ if(!isset($_SESSION['seguridad']) || $_SESSION['seguridad']['login'] == false){
                 <a class="nav-link " aria-current="page" href="./docente.view.php">Docentes</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Carreras</a>
+                <a class="nav-link" href="./carrera.view.php">Carreras</a>
               </li>
               <li class="nav-item ">
-                <a class="nav-link" href="#">Cursos</a>
+                <a class="nav-link" href="./curso.view.php">Cursos</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="../controllers/usuario.controller.php?operacion=destroy">Cerrar sesión</a>
@@ -77,7 +77,7 @@ if(!isset($_SESSION['seguridad']) || $_SESSION['seguridad']['login'] == false){
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <h3 class="text-center">Imformación de Matriculas</h3>
+          <h3 class="text-center">Información de Matriculas</h3>
         </div>
         <div class="card-body">
           <div class="col-12">
@@ -112,7 +112,7 @@ if(!isset($_SESSION['seguridad']) || $_SESSION['seguridad']['login'] == false){
                 <form action="" id="registro-matricula">
                   <div class="row">
                     <div class="mb-3 col-lg-6">
-                      <label for="matriculado" class="form-label">Alumno:</label>
+                      <label for="matriculado" class="form-label">Nombres:</label>
                       <input type="text" class="form-control" id="matriculado" placeholder="Escriba..." maxlength="100">
                     </div>
                     <div class="mb-3 col-lg-6">
@@ -291,7 +291,7 @@ if(!isset($_SESSION['seguridad']) || $_SESSION['seguridad']['login'] == false){
           const parametros = new URLSearchParams();
           parametros.append("operacion","registrarmatricula");
 
-          //Enviar datos al formulario
+          //Enviar datos 
           parametros.append("alumno",document.querySelector("#matriculado").value);
           parametros.append("fechanac",document.querySelector("#nacimiento").value);
           parametros.append("numdoc",document.querySelector("#documento").value);

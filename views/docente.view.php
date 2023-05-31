@@ -53,10 +53,10 @@ if(!isset($_SESSION['seguridad']) || $_SESSION['seguridad']['login'] == false){
                           <a class="nav-link " aria-current="page" href="./docente.view.php">Docentes</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="#">Carreras</a>
+                          <a class="nav-link" href="./carrera.view.php">Carreras</a>
                       </li>
                       <li class="nav-item ">
-                          <a class="nav-link" href="#">Cursos</a>
+                          <a class="nav-link" href="./curso.view.php">Cursos</a>
                       </li>
                       <li class="nav-item">
                           <a class="nav-link" href="../controllers/usuario.controller.php?operacion=destroy">Cerrar sesión</a>
@@ -76,7 +76,7 @@ if(!isset($_SESSION['seguridad']) || $_SESSION['seguridad']['login'] == false){
             <form action="" autocomplete="off" id="form-docentes">
               <div class="card">
                 <div class="card-header">
-                  Registro de Docentes
+                <h5 class="text-center">REGISTRO DE DOCENTES</h5>
                 </div>
                 <div class="card-body">
                     <div class="mb-3">
@@ -114,7 +114,7 @@ if(!isset($_SESSION['seguridad']) || $_SESSION['seguridad']['login'] == false){
                   <div class="d-grid gap-2">
                     <button class="btn btn-sm btn-success" id="registrardocente" type="button" >Registrar</button>
                     <button class="btn btn-sm btn-primary" id="actualizardocente" type="button" >Actualizar</button>
-                    <button class="btn btn-sm btn-secondary" id="reiniciar" type="reset" >Riniciar</button>
+                    <button class="btn btn-sm btn-secondary" id="reiniciar" type="reset" >Reiniciar</button>
                   </div>
                 </div> <!-- fin del footer  -->
                 
@@ -256,7 +256,7 @@ if(!isset($_SESSION['seguridad']) || $_SESSION['seguridad']['login'] == false){
             
 
             //obtiene los datos de la tabla y los muestra en esta seccion tbody
-            function renderData(){
+            function MostrarDocentes(){
                 //construimos un obejto conteniendo la informacion a enviar
                 const parametros = new URLSearchParams();
                 parametros.append("operacion","listardocentes");
@@ -274,14 +274,11 @@ if(!isset($_SESSION['seguridad']) || $_SESSION['seguridad']['login'] == false){
                     <tr>
                         <td>${registro.iddocente}</td>
                         <td>${registro.docente}</td>
-                        
-                        
                         <td>${registro.especialidad}</td>
-                        <td>${registro.nombrecurso}</td>
-                        
+                        <td>${registro.nombrecurso}</td>          
                         <td>
-                        <a href='#' class='eliminar btn btn-danger btn-sm' data-iddocente='${registro.iddocente}'>Eliminar</a> 
-                        <a href='#' class='editar btn btn-info btn-sm' data-iddocente='${registro.iddocente}'>Editar</a>
+                            <a href='#' class='eliminar btn btn-danger btn-sm' data-iddocente='${registro.iddocente}'>Eliminar</a> 
+                            <a href='#' class='editar btn btn-info btn-sm' data-iddocente='${registro.iddocente}'>Editar</a>
                         </td>
                     </tr>
                     `;
@@ -311,7 +308,7 @@ if(!isset($_SESSION['seguridad']) || $_SESSION['seguridad']['login'] == false){
                 .then(response => response.json())
                 .then(datos =>{
                     if(datos.status){
-                    renderData();
+                    MostrarDocentes();
                     document.querySelector("#form-docentes").reset();
                     document.querySelector("#nomdoc").focus();
                     }else{
@@ -326,7 +323,7 @@ if(!isset($_SESSION['seguridad']) || $_SESSION['seguridad']['login'] == false){
                 const parametros = new URLSearchParams();
                 parametros.append("operacion","actualizardocente");
     
-                //Enviar los datos del formulario (que se encuentra en el modal)
+                //Enviar los datos al formulario
                 parametros.append("iddocente",iddocente);
                 parametros.append("docente",document.querySelector("#nomdoc").value);
                 parametros.append("fechanac",document.querySelector("#nacimiento").value);
@@ -336,13 +333,13 @@ if(!isset($_SESSION['seguridad']) || $_SESSION['seguridad']['login'] == false){
                 parametros.append("idcarrera",document.querySelector("#carrera").value);
     
                 fetch("../controllers/docente.controller.php",{
-                method: 'POST',
-                body: parametros
+                    method: 'POST',
+                    body: parametros
                 })
                 .then(response => response.json())
                 .then(datos =>{
                     if(datos.status){
-                    renderData();
+                    MostrarDocentes();
                     // modal.toggle();
                     document.querySelector("#form-docentes").reset();
                     document.querySelector("#nomdoc").focus();
@@ -410,7 +407,7 @@ if(!isset($_SESSION['seguridad']) || $_SESSION['seguridad']['login'] == false){
             //Eventos
             btnRegistrar.addEventListener("click", docenteRegister);
             btnActualizar.addEventListener("click",docentelUpdate);
-            renderData();
+            MostrarDocentes();
             ObtenerCursos();
             ObtenerCarreras();
         });
